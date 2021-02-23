@@ -19,7 +19,7 @@ if [ $input == "nginx" ]; then
 	echo "Allow incoming traffic for this profile"
 	sudo ufw allow in "Nginx Full"
 
-	echo "installing php.."
+	echo "Installing php.."
 	sudo apt install php-fpm php-mysql -y
 
         cp ./nginx-default.conf /etc/nginx/sites-available/default
@@ -27,7 +27,7 @@ if [ $input == "nginx" ]; then
 	echo "NGINX + PHP Installed"
 
 elif [ $input == "mariadb" ]; then
-	echo "installing mariadb.."
+	echo "Installing mariadb.."
 	sudo apt install mariadb-server -y
 	sudo service mariadb stop
 	sudo mysql_install_db
@@ -44,7 +44,7 @@ elif [ $input == "mean" ]; then
 	sudo systemctl start mongod
 	service mongod status
 
-	echo "installing nodejs.. - To install your own NodeJS version, try nvm option"
+	echo "Installing nodejs.. - To install your own NodeJS version, try nvm option"
 	curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 	sudo apt install -y nodejs
 	sudo apt install build-essential
