@@ -29,7 +29,7 @@ if [ $input == "nginx" ]; then
         sudo cp ./nginx-default.conf /etc/nginx/sites-available/default
 	sudo systemctl reload nginx
 	sudo rm -rf /var/www/html/index*
-	echo "<?php phpinfo();" | sudo tee -a /var/www/html/index.php
+	echo "<?php phpinfo();" | sudo tee -a /var/www/html/index.php >/dev/null
 	echo "nginx + php installed"
 
 elif [ $input == "mariadb" ]; then
