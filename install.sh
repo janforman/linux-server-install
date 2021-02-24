@@ -46,7 +46,7 @@ elif [ $input == "wso2mi" ]; then
         sudo wget -O /tmp/ei.zip https://github.com/wso2/micro-integrator/releases/download/v1.2.0/wso2mi-1.2.0.zip
         unzip /tmp/ei.zip -d /opt
         rm /tmp/ei.zip
-	sudo apt install openjdk-8-jdk
+	sudo apt install -y openjdk-8-jdk
 	sudo ufw allow 8290,8253/tcp
 	cp ./init.d-wso2mi.sh /etc/init.d/wso2mi
 	chmod +x /etc/init.d/wso2mi
@@ -86,7 +86,7 @@ elif [ $input == "mean" ]; then
 	echo "MEAN stack installed!"
 
 elif [ $input == "jdk" ] || [ $input == "java" ]; then
-	sudo apt install openjdk-8-jdk
+	sudo apt install -y openjdk-8-jdk
 	sudo update-alternatives --list java
 
 elif [ $input == "docker" ]; then
