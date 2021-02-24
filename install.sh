@@ -26,7 +26,7 @@ if [ $input == "nginx" ]; then
 	sudo systemctl reload nginx
 	rm -rf /var/www/html/index*
 	echo "<?php phpinfo();" >/var/www/html/index.php
-	echo "NGINX + PHP Installed"
+	echo "nginx + php installed"
 
 elif [ $input == "mariadb" ]; then
 	echo "Installing mariadb.."
@@ -37,7 +37,7 @@ elif [ $input == "mariadb" ]; then
 	sudo mysql_secure_installation
 
 elif [ $input == "mean" ]; then
-	echo "Installing mean stack.. [Installs MongoDB, NodeJS version 6+]"
+	echo "Installing mean stack.. [Installs MongoDB, NodeJS version 12]"
 	sudo apt install git -y
 	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 20691eec35216c63caf66ce1656408e390cfb1f5
 	echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
@@ -51,7 +51,7 @@ elif [ $input == "mean" ]; then
 	sudo apt install -y nodejs
 	sudo apt install build-essential
 	
-	echo "MEAN stack Installed!"
+	echo "MEAN stack installed!"
 
 elif [ $input == "jdk" ] || [ $input == "java" ]; then
 	sudo apt install openjdk-8-jdk
