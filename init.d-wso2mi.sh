@@ -14,7 +14,7 @@
 [ -z "$JAVA_HOME" ] && JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre"
 WSO2_HOME="/opt/wso2mi-1.2.0"
 
-# defeine service commands
+# define service commands
 startcmd="${WSO2_HOME}/bin/micro-integrator.sh start"
 restartcmd="${WSO2_HOME}/bin/micro-integrator.sh restart"
 stopcmd="${WSO2_HOME}/bin/micro-integrator.sh stop"
