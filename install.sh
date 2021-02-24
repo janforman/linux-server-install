@@ -4,8 +4,8 @@ sed -i '/^#.* en_US.UTF-8* /s/^#//' /etc/locale.gen
 sudo locale-gen
 
 clear
-echo "Designed for Ubuntu 20"
-echo "What you need to install [nginx/mariadb/wso2mi/scylladb/mean/mongodb/jdk/docker/vncserver/phpmyadmin] ?"
+echo "Designed for Ubuntu 20.04.2 LTS"
+echo "What you need to install [nginx/mariadb/wso2mi/scylladb/mean/mongodb/jdk/docker/vncserver/phpmyadmin/nextcloud] ?"
 
 read input
 sudo apt update -y
@@ -144,6 +144,16 @@ elif [ $input == "phpmyadmin" ]; then
 	sudo phpenmod mcrypt
 	sudo phpenmod mbstring
 	sudo ln -s /usr/share/phpmyadmin /var/www/html
+elif [ $input == "nextcloud" ]; then
+	echo "Installing nextcloud..."
+        cp ./nginx-nextcloud.conf /etc/nginx/sites-available/default
+	sudo wget -O /tmp/nc.zip https://download.nextcloud.com/server/releases/nextcloud-21.0.0.zip 
+        unzip /tmp/nc.zip -d /var/www/html
+	mv /var/www/html/nextcloud/* /var/www/html
+	chown -R www-data:www-data /var/www/html
+	rm -rf /var/www/html/nextcloud/
+	rm /tmp/nc.zip
+	echo "Nextcloud in place, continue in websetup!"
 else 
 	echo "Nothing was installed!"
 fi
