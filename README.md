@@ -2,7 +2,7 @@
 Fast use - log in to server and run
 
 ```
-wget https://github.com/janforman/linux-server-install/archive/main.zip -O /tmp/t.zip && unzip /tmp/t.zip -d /opt && rm /tmp/t.zip && cd /opt/linux-server-install-main/ && ./install.sh
+wget https://github.com/janforman/linux-server-install/archive/main.zip -O /tmp/t.zip && unzip /tmp/t.zip -d /tmp && rm /tmp/t.zip && cd /tmp/linux-server-install-main/ && ./install.sh
 ```
 
 * nginx + php
