@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Designed for Ubuntu 20"
-echo "What you need to install [nginx/mariadb/wso2mi/mean/mongodb/jdk/docker/vncserver/phpmyadmin] ?"
+echo "What you need to install [nginx/mariadb/wso2mi/scylladb/mean/mongodb/jdk/docker/vncserver/phpmyadmin] ?"
 
 read input
 sudo apt update -y
@@ -45,6 +45,13 @@ elif [ $input == "wso2mi" ]; then
 	sudo apt install openjdk-8-jdk
 	sudo ufw allow 8290,8253/tcp
 	echo "WSO2 Micro Integrator installed"
+
+elif [ $input == "scylladb" ]; then
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 5e08fbd8b5d6ec9c
+	sudo curl -L --output /etc/apt/sources.list.d/scylla.list http://downloads.scylladb.com/deb/ubuntu/scylla-4.4-$(lsb_release -s -c).list
+	sudo apt-get install -y scylla
+	sudo apt-get install -y openjdk-8-jre-headless
+	echo "ScyllaDB 4.4 installed"
 
 elif [ $input == "mean" ]; then
 	echo "Installing mean stack.. [Installs MongoDB, NodeJS version 12]"
