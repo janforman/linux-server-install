@@ -35,6 +35,7 @@ elif [ $input == "mariadb" ]; then
 	sudo mysql_install_db
 	sudo service mariadb start
 	sudo mysql_secure_installation
+	echo "MariaDB installed"
 
 elif [ $input == "wso2mi" ]; then
  	echo "Installing WSO2 Micro Integrator 1.2.0"
@@ -42,6 +43,8 @@ elif [ $input == "wso2mi" ]; then
         unzip /tmp/ei.zip -d /opt
         rm /tmp/ei.zip
 	sudo apt install openjdk-8-jdk
+	sudo ufw allow 8290,8253/tcp
+	echo "WSO2 Micro Integrator installed"
 
 elif [ $input == "mean" ]; then
 	echo "Installing mean stack.. [Installs MongoDB, NodeJS version 12]"
