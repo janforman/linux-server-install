@@ -44,6 +44,9 @@ elif [ $input == "wso2mi" ]; then
         rm /tmp/ei.zip
 	sudo apt install openjdk-8-jdk
 	sudo ufw allow 8290,8253/tcp
+	cp ./init.d-wso2mi.sh /etc/init.d/wso2mi
+	chmod +x /etc/init.d/wso2mi
+	sudo update-rc.d wso2mi defaults
 	echo "WSO2 Micro Integrator installed"
 
 elif [ $input == "scylladb" ]; then
