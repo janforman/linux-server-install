@@ -1,5 +1,6 @@
 #!/bin/bash
 
+clear
 echo "Designed for Ubuntu 20"
 echo "What you need to install [nginx/mariadb/wso2mi/scylladb/mean/mongodb/jdk/docker/vncserver/phpmyadmin] ?"
 
