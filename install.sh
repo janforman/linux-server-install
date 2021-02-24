@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Designed for Ubuntu 20"
-echo "What you need to install [nginx/mariadb/mean/mongodb/jdk/docker/vncserver/phpmyadmin] ?"
+echo "What you need to install [nginx/mariadb/wso2mi/mean/mongodb/jdk/docker/vncserver/phpmyadmin] ?"
 
 read input
 sudo apt update -y
@@ -35,6 +35,13 @@ elif [ $input == "mariadb" ]; then
 	sudo mysql_install_db
 	sudo service mariadb start
 	sudo mysql_secure_installation
+
+elif [ $input == "wso2mi" ]; then
+ 	echo "Installing WSO2 Micro Integrator 1.2.0"
+        sudo wget -O /tmp/ei.zip https://github.com/wso2/micro-integrator/releases/download/v1.2.0/wso2mi-1.2.0.zip
+        unzip /tmp/ei.zip -d /opt
+        rm /tmp/ei.zip
+	sudo apt install openjdk-8-jdk
 
 elif [ $input == "mean" ]; then
 	echo "Installing mean stack.. [Installs MongoDB, NodeJS version 12]"
