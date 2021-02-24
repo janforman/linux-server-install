@@ -9,11 +9,12 @@ wget https://github.com/janforman/linux-server-install/archive/main.zip -O /tmp/
 * mariadb
 * scylladb
 * mongodb
-* wso2 microintegrator
+* wso2 microintegrator (mariadb, scylladb, oracle connectors)
 * mean stack (MongoDB, NodeJS)
 * java openjdk
 * docker
 * phpmyadmin
 
 This script is intended to use in VPS (virtual server for single purpose in this case)
+
 It's tested in UBUNTU Server 20.04.2 LTS
