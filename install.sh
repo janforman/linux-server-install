@@ -47,6 +47,8 @@ elif [ $input == "wso2mi" ]; then
 	cp ./init.d-wso2mi.sh /etc/init.d/wso2mi
 	chmod +x /etc/init.d/wso2mi
 	sudo update-rc.d wso2mi defaults
+	useradd  --home /opt/wso2mi-1.2.0 -M wso2
+	chown -R wso2:nogroup /opt/wso2mi-1.2.0
 	echo "WSO2 Micro Integrator installed"
 
 elif [ $input == "scylladb" ]; then
