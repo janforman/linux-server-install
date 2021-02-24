@@ -62,6 +62,10 @@ elif [ $input == "scylladb" ]; then
         sudo apt-get update
         sudo apt-get install -y scylla
 	sudo apt-get install -y openjdk-8-jre-headless
+	sudo scylla_setup --no-raid-setup --nic eth0 --no-kernel-check \
+                 --no-ntp-setup --no-coredump-setup --io-setup 0 \
+                 --no-node-exporter --no-cpuscaling-setup \
+                 --no-fstrim-setup --no-memory-setup --no-rsyslog-setup
 	echo "ScyllaDB 4.4 installed"
 
 elif [ $input == "mean" ]; then
