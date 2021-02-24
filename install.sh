@@ -2,14 +2,14 @@
 # make sure locales are set
 sudo sed -i '/^#.* en_US.UTF-8* /s/^#//' /etc/locale.gen
 sudo locale-gen
+sudo apt update -y
+sudo apt install ssl-cert curl gnupg software-properties-common -y
 
 clear
 echo "Designed for Ubuntu 20.04.2 LTS"
 echo "What you need to install [nginx/mariadb/wso2mi/scylladb/mean/mongodb/jdk/docker/vncserver/phpmyadmin/nextcloud] ?"
 
 read input
-sudo apt update -y
-sudo apt install ssl-cert curl gnupg software-properties-common -y
 
 if [ $input == "nginx" ]; then
 	echo "Installing nginx + PHP.."
@@ -26,9 +26,9 @@ if [ $input == "nginx" ]; then
 	echo "Installing php.."
 	sudo apt install php-fpm php-mysql -y
 
-        cp ./nginx-default.conf /etc/nginx/sites-available/default
+        sudo cp ./nginx-default.conf /etc/nginx/sites-available/default
 	sudo systemctl reload nginx
-	rm -rf /var/www/html/index*
+	sudo rm -rf /var/www/html/index*
 	echo "<?php phpinfo();" >/var/www/html/index.php
 	echo "nginx + php installed"
 
@@ -144,6 +144,8 @@ elif [ $input == "phpmyadmin" ]; then
 	sudo phpenmod mcrypt
 	sudo phpenmod mbstring
 	sudo ln -s /usr/share/phpmyadmin /var/www/html
+	echo "phpmyadmin in place, you can access it on /phpmyadmin!"
+
 elif [ $input == "nextcloud" ]; then
 	echo "Installing nextcloud..."
         cp ./nginx-nextcloud.conf /etc/nginx/sites-available/default
