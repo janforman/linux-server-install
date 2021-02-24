@@ -153,6 +153,7 @@ elif [ $input == "nextcloud" ]; then
 	chown -R www-data:www-data /var/www/html
 	rm -rf /var/www/html/nextcloud/
 	rm /tmp/nc.zip
+	sudo apt install -y php-intl php-bcmath php-gmp php-imagick
 	echo "Nextcloud in place, continue in websetup!"
 else 
 	echo "Nothing was installed!"
