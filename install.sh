@@ -49,7 +49,8 @@ elif [ $input == "wso2mi" ]; then
 elif [ $input == "scylladb" ]; then
 	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 5e08fbd8b5d6ec9c
 	sudo curl -L --output /etc/apt/sources.list.d/scylla.list http://downloads.scylladb.com/deb/ubuntu/scylla-4.4-$(lsb_release -s -c).list
-	sudo apt-get install -y scylla
+        sudo apt-get update
+        sudo apt-get install -y scylla
 	sudo apt-get install -y openjdk-8-jre-headless
 	echo "ScyllaDB 4.4 installed"
 
@@ -77,9 +78,7 @@ elif [ $input == "docker" ]; then
         echo "Installing Docker...."
 
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
         sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-
         sudo apt-get update
 
         echo "Making sure the Docker is installed from Official Docker repo to get the latest version"
