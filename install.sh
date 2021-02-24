@@ -9,7 +9,7 @@ echo "What you need to install [nginx/mariadb/wso2mi/scylladb/mean/mongodb/jdk/d
 
 read input
 sudo apt update -y
-sudo apt install curl gnupg software-properties-common -y
+sudo apt install ssl-cert curl gnupg software-properties-common -y
 
 if [ $input == "nginx" ]; then
 	echo "Installing nginx + PHP.."
