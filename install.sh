@@ -87,6 +87,7 @@ elif [ $input == "mean" ]; then
 
 elif [ $input == "jdk" ] || [ $input == "java" ]; then
 	sudo apt install -y openjdk-8-jdk
+	echo "OpenJDK installed in"
 	sudo update-alternatives --list java
 
 elif [ $input == "docker" ]; then
