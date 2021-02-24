@@ -1,6 +1,6 @@
 #!/bin/bash
 # make sure locales are set
-sed -i '/^#.* en_US.UTF-8* /s/^#//' /etc/locale.gen
+sudo sed -i '/^#.* en_US.UTF-8* /s/^#//' /etc/locale.gen
 sudo locale-gen
 
 clear
