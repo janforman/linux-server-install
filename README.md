@@ -10,6 +10,7 @@ wget https://github.com/janforman/linux-server-install/archive/main.zip -O /tmp/
 * scylladb
 * mongodb
 * wso2 microintegrator
+* mean stack (MongoDB, NodeJS)
 * java openjdk
 * docker
 * phpmyadmin
