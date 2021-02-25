@@ -16,6 +16,6 @@ wget https://github.com/janforman/linux-server-install/archive/main.zip -O /tmp/
 * phpmyadmin
 * nextcloud
 
-This script is intended to use in VPS (virtual server for single purpose in this case)
+This script is intended to use in VPS (virtual server for single purpose in this case) and fresh OS install.
 
 It's tested in UBUNTU Server 20.04.2 LTS
