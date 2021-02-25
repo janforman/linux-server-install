@@ -152,6 +152,7 @@ elif [ $input == "nextcloud" ]; then
         sudo cp ./nginx-nextcloud.conf /etc/nginx/sites-available/default
 	sudo wget -O /tmp/nc.zip https://download.nextcloud.com/server/releases/nextcloud-21.0.0.zip 
         sudo unzip /tmp/nc.zip -d /var/www
+	sudo mv /var/www/html /var/www/html.bak
 	sudo mv /var/www/nextcloud /var/www/html
 	sudo chown -R www-data:www-data /var/www/html
 	sudo rm /tmp/nc.zip
