@@ -24,7 +24,7 @@ if [ $input == "nginx" ]; then
 	sudo ufw allow in "Nginx Full"
 
 	echo "Installing php.."
-	sudo apt install php-fpm php-mysql -y
+	sudo apt install php-fpm php-mysql php-sqlite3 -y
 
         sudo cp ./nginx-default.conf /etc/nginx/sites-available/default
 	sudo systemctl reload nginx
