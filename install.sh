@@ -158,6 +158,7 @@ elif [ $input == "nextcloud" ]; then
 	sudo rm /tmp/nc.zip
 	sudo apt install -y php-intl php-bcmath php-gmp php-imagick
 	sudo sed -i 's/^\(memory_limit\s*=\s*\).*$/\1512M/' /etc/php/7.4/fpm/php.ini
+	sed -i '/clear_env = no/s/^;//g' /etc/php/7.4/fpm/pool.d/www.conf
 	sudo systemctl restart php7.4-fpm
 	echo "Nextcloud in place, continue in websetup!"
 else 
