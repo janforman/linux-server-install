@@ -151,10 +151,9 @@ elif [ $input == "nextcloud" ]; then
 	echo "Installing nextcloud..."
         cp ./nginx-nextcloud.conf /etc/nginx/sites-available/default
 	sudo wget -O /tmp/nc.zip https://download.nextcloud.com/server/releases/nextcloud-21.0.0.zip 
-        unzip /tmp/nc.zip -d /var/www/html
-	mv /var/www/html/nextcloud/* /var/www/html
+        unzip /tmp/nc.zip -d /var/www
+	mv /var/www/nextcloud /var/www/html
 	chown -R www-data:www-data /var/www/html
-	rm -rf /var/www/html/nextcloud/
 	rm /tmp/nc.zip
 	sudo apt install -y php-intl php-bcmath php-gmp php-imagick
 	echo "Nextcloud in place, continue in websetup!"
