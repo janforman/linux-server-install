@@ -142,7 +142,6 @@ elif [ $input == "phpmyadmin" ]; then
 	echo "Installing phpmyadmin..."
 	sudo apt-get update
 	sudo apt-get install phpmyadmin php-mbstring gettext -y
-	sudo phpenmod mcrypt
 	sudo phpenmod mbstring
 	sudo ln -s /usr/share/phpmyadmin /var/www/html
 	echo "phpmyadmin in place, you can access it on /phpmyadmin!"
