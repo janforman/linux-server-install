@@ -13,8 +13,8 @@ wget https://github.com/janforman/linux-server-install/archive/main.zip -O /tmp/
 * mean stack (MongoDB, NodeJS)
 * java openjdk
 * docker
-* phpmyadmin
-* nextcloud
+* phpmyadmin (install nginx first)
+* nextcloud (install nginx first)
 
 This script is intended to use in VPS (virtual server for single purpose in this case) and fresh OS install.
 
