@@ -149,12 +149,12 @@ elif [ $input == "phpmyadmin" ]; then
 
 elif [ $input == "nextcloud" ]; then
 	echo "Installing nextcloud..."
-        cp ./nginx-nextcloud.conf /etc/nginx/sites-available/default
+        sudo cp ./nginx-nextcloud.conf /etc/nginx/sites-available/default
 	sudo wget -O /tmp/nc.zip https://download.nextcloud.com/server/releases/nextcloud-21.0.0.zip 
-        unzip /tmp/nc.zip -d /var/www
-	mv /var/www/nextcloud /var/www/html
-	chown -R www-data:www-data /var/www/html
-	rm /tmp/nc.zip
+        sudo unzip /tmp/nc.zip -d /var/www
+	sudo mv /var/www/nextcloud /var/www/html
+	sudo chown -R www-data:www-data /var/www/html
+	sudo rm /tmp/nc.zip
 	sudo apt install -y php-intl php-bcmath php-gmp php-imagick
 	echo "Nextcloud in place, continue in websetup!"
 else 
