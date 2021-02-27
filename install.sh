@@ -29,6 +29,9 @@ if [ $input == "nginx" ]; then
         sudo cp ./nginx-default.conf /etc/nginx/sites-available/default
 	sudo systemctl reload nginx
 	sudo rm -rf /var/www/html/index*
+	# enable opcache
+	sed -i '/opcache.enable=1/s/^;//g' /etc/php/7.4/fpm/php.ini
+	# enable opcache
 	echo "<?php phpinfo();" | sudo tee -a /var/www/html/index.php >/dev/null
 	echo "nginx + php installed"
 
