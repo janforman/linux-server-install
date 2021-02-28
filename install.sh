@@ -72,6 +72,14 @@ elif [ $input == "scylladb" ]; then
                  --no-fstrim-setup --no-memory-setup --no-rsyslog-setup
 	echo "ScyllaDB 4.4 installed"
 
+elif [ $input == "galeradb" ]; then
+	sudo apt install mariadb-server -y
+	sudo service mariadb stop
+	sudo cp ./galera.cnf /etc/mysql/conf.d/
+	sudo ufw allow 3306,4567,4568,4444/tcp
+	sudo ufw allow 4567/udp
+	echo "GaleraDB installed"
+
 elif [ $input == "mean" ]; then
 	echo "Installing mean stack.. [Installs MongoDB, NodeJS version 12]"
 	sudo apt install git -y
