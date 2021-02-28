@@ -9,6 +9,7 @@ wget https://github.com/janforman/linux-server-install/archive/main.zip -O /tmp/
 * mariadb
 * scylladb
 * mongodb
+* galeradb
 * wso2 microintegrator (mariadb, scylladb, mongodb, postgres, oracle connectors)
 * mean stack (MongoDB, NodeJS)
 * java openjdk
