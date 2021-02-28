@@ -191,6 +191,7 @@ elif [ $input == "nextcloud" ]; then
 	sudo sed -i 's/^\(memory_limit\s*=\s*\).*$/\1512M/' /etc/php/7.4/fpm/php.ini
 	sudo sed -i '/clear_env = no/s/^;//g' /etc/php/7.4/fpm/pool.d/www.conf
 	sudo systemctl restart php7.4-fpm
+	sudo systemctl reload nginx
 	echo "Nextcloud in place, continue in websetup!"
 else 
 	echo "Nothing was installed!"
