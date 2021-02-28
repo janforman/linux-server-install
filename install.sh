@@ -83,7 +83,7 @@ elif [ $input == "galeradb" ]; then
         read IPLIST
         HOSTNAME="$(hostname -s)"
         IP="$(hostname -I|xargs)"
-        sudo sed -i 's/^\(wsrep_node_name\s*=\s*\).*$/\1"'$HOSTNAME'"/' /etc/mysql/conf.d/galera.cnf
+        sudo sed -i 's/^\(wsrep_node_name\s*=\s*\).*$/\1"'${HOSTNAME}'"/' /etc/mysql/conf.d/galera.cnf
         sudo sed -i -e "s/ThisNodeIP/${IP}/g" /etc/mysql/conf.d/galera.cnf
         sudo sed -i -e "s/NodeIPs/${IPLIST}/g" /etc/mysql/conf.d/galera.cnf
 
