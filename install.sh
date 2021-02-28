@@ -91,10 +91,10 @@ elif [ $input == "galeradb" ]; then
         response="${response,,}"
 
         if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
-            echo "Yes cluster init in progress"
+            echo "Yes - cluster init in progress"
             sudo galera_new_cluster
 	else
-            echo "No starting DB"
+            echo "No - starting DB directly"
             sudo service mariadb start
 	fi
 
