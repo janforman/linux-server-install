@@ -87,6 +87,17 @@ elif [ $input == "galeradb" ]; then
         sed -i -e "s/ThisNodeIP/${IP}/g" /etc/mysql/conf.d/galera.cnf
         sed -i -e "s/NodeIPs/${IPLIST}/g" /etc/mysql/conf.d/galera.cnf
 
+        read -r -p "Is this first node of cluster? [Y/n]" response
+        response="${response,,}"
+
+        if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
+            echo "Yes cluster init in progress"
+            sudo galera_new_cluster
+	else
+            echo "No starting DB"
+            sudo service mariadb start
+	fi
+
 	echo "GaleraDB installed"
 
 elif [ $input == "mean" ]; then
