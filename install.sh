@@ -3,7 +3,7 @@
 sudo sed -i '/^#.* en_US.UTF-8* /s/^#//' /etc/locale.gen
 sudo locale-gen
 sudo apt update -y
-sudo apt install ssl-cert curl gnupg software-properties-common -y
+sudo apt install ssl-cert curl gnupg software-properties-common rsync -y
 
 clear
 echo "Designed for Ubuntu 20.04.2 LTS"
