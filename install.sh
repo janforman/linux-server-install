@@ -7,7 +7,7 @@ sudo apt install ssl-cert curl gnupg software-properties-common rsync -y
 
 clear
 echo "Designed for Ubuntu 20.04.2 LTS"
-echo "What you need to install [nginx/mariadb/wso2mi/scylladb/mean/mongodb/jdk/docker/vncserver/phpmyadmin/nextcloud] ?"
+echo "What you need to install [nginx/mariadb/wso2mi/scylladb/galeradb/mean/mongodb/jdk/docker/vncserver/phpmyadmin/nextcloud] ?"
 
 read input
 
