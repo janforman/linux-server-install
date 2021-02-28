@@ -187,7 +187,7 @@ elif [ $input == "nextcloud" ]; then
 	sudo mv /var/www/nextcloud /var/www/html
 	sudo chown -R www-data:www-data /var/www/html
 	sudo rm /tmp/nc.zip
-	sudo apt install -y php-intl php-bcmath php-gmp php-imagick
+	sudo apt install -y php-intl php-bcmath php-gmp php-imagick php-zip php-xml php-mbstring php-curl php-gd
 	sudo sed -i 's/^\(memory_limit\s*=\s*\).*$/\1512M/' /etc/php/7.4/fpm/php.ini
 	sudo sed -i '/clear_env = no/s/^;//g' /etc/php/7.4/fpm/pool.d/www.conf
 	sudo systemctl restart php7.4-fpm
