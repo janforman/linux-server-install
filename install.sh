@@ -84,8 +84,8 @@ elif [ $input == "galeradb" ]; then
         HOSTNAME="$(hostname -s)"
         IP="$(hostname -I|xargs)"
         sudo sed -i 's/^\(wsrep_node_name\s*=\s*\).*$/\1"'$HOSTNAME'"/' /etc/mysql/conf.d/galera.cnf
-        sed -i -e "s/ThisNodeIP/${IP}/g" /etc/mysql/conf.d/galera.cnf
-        sed -i -e "s/NodeIPs/${IPLIST}/g" /etc/mysql/conf.d/galera.cnf
+        sudo sed -i -e "s/ThisNodeIP/${IP}/g" /etc/mysql/conf.d/galera.cnf
+        sudo sed -i -e "s/NodeIPs/${IPLIST}/g" /etc/mysql/conf.d/galera.cnf
 
         read -r -p "Is this first node of cluster? [Y/n]" response
         response="${response,,}"
