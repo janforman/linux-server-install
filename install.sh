@@ -32,6 +32,8 @@ if [ $input == "nginx" ]; then
 	# opcache more agressive
 	sudo sed -i '/opcache.revalidate_freq=2/s/^;//g' /etc/php/7.4/fpm/php.ini
 	sudo sed -i 's/^\(opcache.revalidate_freq\s*=\s*\).*$/\1240/' /etc/php/7.4/fpm/php.ini
+	#sudo sed -i '/opcache.validate_timestamps=1/s/^;//g' /etc/php/7.4/fpm/php.ini
+	#sudo sed -i 's/^\(opcache.validate_timestamps\s*=\s*\).*$/\10/' /etc/php/7.4/fpm/php.ini
 	# opcache more agressive
 	echo "<?php phpinfo();" | sudo tee -a /var/www/html/index.php >/dev/null
 	echo "nginx + php installed"
