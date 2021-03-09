@@ -82,8 +82,6 @@ elif [ $input == "scylladb" ]; then
 
 elif [ $input == "galeradb" ]; then
 	sudo apt install mariadb-server mariadb-backup -y
-	sudo mariadb -u root -p -e "CREATE USER 'mariabackup'@'localhost' IDENTIFIED BY 'mypassword';"
-	sudo mariadb -u root -p -e "GRANT RELOAD, PROCESS, LOCK TABLES, REPLICATION CLIENT ON *.* TO 'mariabackup'@'localhost';"
 	sudo service mariadb stop
 	sudo cp ./galera.cnf /etc/mysql/conf.d/
 	sudo ufw allow 3306,4567,4568,4444/tcp
@@ -103,6 +101,8 @@ elif [ $input == "galeradb" ]; then
         if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
             echo "Yes - cluster init in progress"
             sudo galera_new_cluster
+            sudo mariadb -u root -p -e "CREATE USER 'mariabackup'@'localhost' IDENTIFIED BY 'mypassword';"
+            sudo mariadb -u root -p -e "GRANT RELOAD, PROCESS, LOCK TABLES, REPLICATION CLIENT ON *.* TO 'mariabackup'@'localhost';"
 	else
             echo "No - starting DB directly"
             sudo service mariadb start
