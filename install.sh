@@ -100,7 +100,9 @@ elif [ $input == "galeradb" ]; then
 
         if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
             echo "Yes - cluster init in progress"
+	    sudo mysql_install_db
             sudo galera_new_cluster
+	    sudo mysql_secure_installation
             sudo mariadb -u root -p -e "CREATE USER 'mariabackup'@'localhost' IDENTIFIED BY 'mypassword';"
             sudo mariadb -u root -p -e "GRANT RELOAD, PROCESS, LOCK TABLES, REPLICATION CLIENT ON *.* TO 'mariabackup'@'localhost';"
 	else
