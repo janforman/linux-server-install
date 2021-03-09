@@ -14,6 +14,7 @@ wsrep_cluster_address="gcomm://NodeIPs"
 
 # Galera Synchronization Configuration
 wsrep_sst_method=mariabackup
+wsrep_sst_auth = mariabackup:mypassword
 
 # Galera Node Configuration
 wsrep_node_address="ThisNodeIP"
