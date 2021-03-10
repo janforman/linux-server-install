@@ -90,7 +90,7 @@ elif [ $input == "galeradb" ]; then
         echo "Insert all node IP separated by coma for example 10.0.0.1,10.0.0.2,10.0.0.3"
         read IPLIST
         HOSTNAME="$(hostname -s)"
-        IP="$(hostname -I|xargs)"
+        IP="$(hostname -i|xargs)"
         sudo sed -i 's/^\(wsrep_node_name\s*=\s*\).*$/\1"'${HOSTNAME}'"/' /etc/mysql/conf.d/galera.cnf
         sudo sed -i -e "s/ThisNodeIP/${IP}/g" /etc/mysql/conf.d/galera.cnf
         sudo sed -i -e "s/NodeIPs/${IPLIST}/g" /etc/mysql/conf.d/galera.cnf
