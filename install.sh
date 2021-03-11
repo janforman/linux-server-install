@@ -184,11 +184,18 @@ elif [ $input == "mongodb" ]; then
 
 elif [ $input == "phpmyadmin" ]; then
 	echo "Installing phpmyadmin..."
-	sudo apt-get update
 	sudo apt-get install phpmyadmin php-mbstring gettext -y
 	sudo phpenmod mbstring
 	sudo ln -s /usr/share/phpmyadmin /var/www/html
 	echo "phpmyadmin in place, you can access it on /phpmyadmin!"
+
+elif [ $input == "coturn" ]; then
+	echo "Installing coturn..."
+	sudo apt-get install coturn -y
+	sudo ufw allow 8443/tcp
+	sudo ufw allow 8443/udp
+	sudo ufw allow 49152:65535/udp
+	echo "Successfully installed coturn server!"
 
 elif [ $input == "nextcloud" ]; then
 	echo "Installing nextcloud..."
