@@ -196,6 +196,8 @@ elif [ $input == "coturn" ]; then
 	sudo ufw allow 443/tcp
 	sudo ufw allow 443/udp
 	sudo ufw allow 49152:65535/udp
+	sudo mkdir -p /etc/systemd/system/coturn.service.d
+	sudo cp ./systemd-coturn.conf /etc/systemd/system/coturn.service.d/override.conf
 	echo "Successfully installed coturn server!"
 
 elif [ $input == "nextcloud" ]; then
