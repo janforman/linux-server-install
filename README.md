@@ -15,6 +15,7 @@ wget https://github.com/janforman/linux-server-install/archive/main.zip -O /tmp/
 * java openjdk
 * docker
 * phpmyadmin (install nginx first)
+* coturn (STUN/TURN on port 443)
 * nextcloud (install nginx first)
 
 This script is intended to use in VPS (virtual server for single purpose in this case) and fresh OS install.
