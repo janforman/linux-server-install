@@ -79,6 +79,7 @@ elif [ $input == "scylladb" ]; then
                  --no-ntp-setup --no-coredump-setup \
                  --no-node-exporter --no-cpuscaling-setup \
                  --no-fstrim-setup --no-memory-setup --no-rsyslog-setup
+	sudo ufw allow 9042,9142,7199,10000,9180,9100,9160,19042,19142,7000,7001/tcp
 	echo "ScyllaDB 4.4 installed"
 
 elif [ $input == "galeradb" ]; then
