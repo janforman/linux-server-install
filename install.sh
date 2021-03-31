@@ -7,7 +7,7 @@ sudo apt install ssl-cert curl gnupg software-properties-common rsync -y
 
 clear
 echo "Designed for Ubuntu 20.04.2 LTS"
-echo "What you need to install [nginx/mariadb/wso2mi/scylladb/galeradb/mean/mongodb/jdk/docker/vncserver/phpmyadmin/nextcloud] ?"
+echo "What you need to install [nginx/mariadb/wso2mi/scylladb/galeradb/mean/mongodb/jdk/docker/vncserver/phpmyadmin/coturn/nextcloud] ?"
 
 read input
 
@@ -71,10 +71,11 @@ elif [ $input == "wso2mi" ]; then
 elif [ $input == "scylladb" ]; then
 	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 5e08fbd8b5d6ec9c
 	sudo curl -L --output /etc/apt/sources.list.d/scylla.list http://downloads.scylladb.com/deb/ubuntu/scylla-4.4-$(lsb_release -s -c).list
-        sudo apt-get update
+	NIC=$(ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}')
+	sudo apt-get update
         sudo apt-get install -y scylla
 	sudo apt-get install -y openjdk-8-jre-headless
-	sudo scylla_setup --no-raid-setup --nic eth0 --no-kernel-check \
+	sudo scylla_setup --no-raid-setup --nic ${NIC} --no-kernel-check \
                  --no-ntp-setup --no-coredump-setup --io-setup 0 \
                  --no-node-exporter --no-cpuscaling-setup \
                  --no-fstrim-setup --no-memory-setup --no-rsyslog-setup
