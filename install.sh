@@ -74,7 +74,7 @@ elif [ $input == "scylladb" ]; then
 	sudo apt-get update
         sudo apt-get install -y scylla
 	sudo apt-get install -y openjdk-8-jre-headless
-	NIC=$(ip link | awk -F: '$0 !~ "lo|vir|wl|docker|^[^0-9]"{print $2;getline}')
+	NIC=$(ip link | awk -F: '$0 !~ "lo|vir|wl|docker|^[^0-9]"{sub(/@.*/,"");print $2;getline}')
 	sudo scylla_setup --no-raid-setup --nic ${NIC} --no-kernel-check \
                  --no-ntp-setup --no-coredump-setup \
                  --no-node-exporter --no-cpuscaling-setup \
