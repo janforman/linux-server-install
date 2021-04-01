@@ -10,6 +10,9 @@ echo "Designed for Ubuntu 20.04.2 LTS"
 echo "What you need to install [nginx/mariadb/wso2mi/scylladb/galeradb/mean/mongodb/jdk/docker/vncserver/phpmyadmin/coturn/nextcloud] ?"
 
 read input
+IP="$(hostname -i|xargs)"
+HOSTNAME="$(hostname -s)"
+NIC=$(ip link | awk -F: '$0 !~ "lo|vir|wl|docker|^[^0-9]"{sub(/@.*/,"");print $2;getline}')
 
 if [ $input == "nginx" ]; then
 	echo "Installing nginx + PHP.."
@@ -74,11 +77,12 @@ elif [ $input == "scylladb" ]; then
 	sudo apt-get update
         sudo apt-get install -y scylla
 	sudo apt-get install -y openjdk-8-jre-headless
-	NIC=$(ip link | awk -F: '$0 !~ "lo|vir|wl|docker|^[^0-9]"{sub(/@.*/,"");print $2;getline}')
+	sudo sed -i 's/^\(listen_address\s*:\s*\).*$/\1'${IP}'/' /etc/scylla/scylla.yaml
 	sudo scylla_setup --no-raid-setup --nic ${NIC} --no-kernel-check \
                  --no-ntp-setup --no-coredump-setup \
                  --no-node-exporter --no-cpuscaling-setup \
                  --no-fstrim-setup --no-memory-setup --no-rsyslog-setup
+
 	sudo ufw allow 9042,9142,7199,10000,9180,9100,9160,19042,19142,7000,7001/tcp
 	echo "ScyllaDB 4.4 installed"
 
@@ -91,8 +95,6 @@ elif [ $input == "galeradb" ]; then
 	
         echo "Insert all node IP separated by coma for example 10.0.0.1,10.0.0.2,10.0.0.3"
         read IPLIST
-        HOSTNAME="$(hostname -s)"
-        IP="$(hostname -i|xargs)"
         sudo sed -i 's/^\(wsrep_node_name\s*=\s*\).*$/\1"'${HOSTNAME}'"/' /etc/mysql/conf.d/galera.cnf
         sudo sed -i -e "s/ThisNodeIP/${IP}/g" /etc/mysql/conf.d/galera.cnf
         sudo sed -i -e "s/NodeIPs/${IPLIST}/g" /etc/mysql/conf.d/galera.cnf
