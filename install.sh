@@ -10,7 +10,7 @@ echo "Designed for Ubuntu 20.04.2 LTS"
 echo "What you need to install [nginx/mariadb/wso2mi/scylladb/galeradb/mean/mongodb/jdk/docker/vncserver/phpmyadmin/coturn/nextcloud] ?"
 
 read input
-IP="$(hostname -i|xargs)"
+IP="$(hostname -I|xargs)"
 HOSTNAME="$(hostname -s)"
 NIC=$(ip link | awk -F: '$0 !~ "lo|vir|wl|docker|^[^0-9]"{sub(/@.*/,"");print $2;getline}')
 
