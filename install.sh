@@ -78,7 +78,8 @@ elif [ $input == "scylladb" ]; then
         sudo apt-get install -y scylla
 	sudo apt-get install -y openjdk-8-jre-headless
 	sudo sed -i 's/^\(listen_address\s*:\s*\).*$/\1'${IP}'/' /etc/scylla/scylla.yaml
-	sudo scylla_setup --no-raid-setup --nic ${NIC} --no-kernel-check \
+	sudo /opt/scylladb/scripts/scylla_dev_mode_setup --developer-mode 1
+        sudo scylla_setup --no-raid-setup --nic ${NIC} --no-kernel-check \
                  --no-ntp-setup --no-coredump-setup \
                  --no-node-exporter --no-cpuscaling-setup \
                  --no-fstrim-setup --no-memory-setup --no-rsyslog-setup
