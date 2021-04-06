@@ -76,8 +76,8 @@ elif [ $input == "scylladb" ]; then
 	sudo curl -L --output /etc/apt/sources.list.d/scylla.list http://downloads.scylladb.com/deb/ubuntu/scylla-4.4-$(lsb_release -s -c).list
 	sudo apt-get update
         sudo apt-get install -y scylla
-	sudo apt-get install -y openjdk-8-jre-headless
 	sudo sed -i 's/^\(listen_address\s*:\s*\).*$/\1'${IP}'/' /etc/scylla/scylla.yaml
+	sudo sed -i 's/^\(rpc_address\s*:\s*\).*$/\1'${IP}'/' /etc/scylla/scylla.yaml
 	sudo /opt/scylladb/scripts/scylla_dev_mode_setup --developer-mode 1
         sudo scylla_setup --no-raid-setup --nic ${NIC} --no-kernel-check \
                  --no-ntp-setup --no-coredump-setup \
