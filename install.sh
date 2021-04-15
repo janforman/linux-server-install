@@ -87,6 +87,13 @@ elif [ $input == "scylladb" ]; then
 	sudo ufw allow 9042,9142,7199,10000,9180,9100,9160,19042,19142,7000,7001/tcp
 	echo "ScyllaDB 4.4 installed"
 
+elif [ $input == "citus" ]; then
+	curl https://install.citusdata.com/community/deb.sh | sudo bash
+	sudo apt-get -y install postgresql-13-citus-10.0
+	sudo pg_conftool 13 main set shared_preload_libraries citus
+	sudo ufw allow 5432/tcp
+	echo "Citus installed"
+
 elif [ $input == "galeradb" ]; then
 	sudo apt install mariadb-server mariadb-backup -y
 	sudo service mariadb stop
@@ -114,7 +121,6 @@ elif [ $input == "galeradb" ]; then
             echo "No - starting DB directly"
             sudo service mariadb start
 	fi
-
 	echo "GaleraDB installed"
 
 elif [ $input == "mean" ]; then
