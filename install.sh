@@ -91,6 +91,12 @@ elif [ $input == "citus" ]; then
 	curl https://install.citusdata.com/community/deb.sh | sudo bash
 	sudo apt-get -y install postgresql-13-citus-10.0
 	sudo pg_conftool 13 main set shared_preload_libraries citus
+	sudo pg_conftool 13 main set listen_addresses '*'
+	sudo echo "host    all             all             10.0.0.0/8              trust" >/etc/postgresql/13/main/pg_hba.conf
+	sudo echo "host    all             all             127.0.0.1/32            trust" >>/etc/postgresql/13/main/pg_hba.conf
+	sudo echo "host    all             all             ::1/128                 trust" >>/etc/postgresql/13/main/pg_hba.conf
+	sudo service postgresql restart
+        sudo systemctl enable postgresql
 	sudo ufw allow 5432/tcp
 	echo "Citus installed"
 
