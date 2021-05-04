@@ -228,10 +228,7 @@ elif [ $input == "coturn" ]; then
 
 elif [ $input == "ceph" ]; then
 	echo "Installing CEPH.."
-        curl -fsSL https://download.ceph.com/keys/release.asc | sudo apt-key add -
-	echo deb https://download.ceph.com/debian-pacific/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
-	sudo apt update -y
-	sudo apt install cephadm -y
+	sudo apt install cephadm ceph-common -y
 	
 	sudo cephadm install
 
