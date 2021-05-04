@@ -228,23 +228,23 @@ elif [ $input == "coturn" ]; then
 
 elif [ $input == "ceph" ]; then
 	echo "Installing CEPH.."
-	sudo apt install cephadm -y
-	
-	sudo cephadm add-repo --release pacific
+	curl -fsSL https://github.com/ceph/ceph/raw/pacific/src/cephadm/cephadm --output /tmp/cephadm
+	chmod +x /tmp/cephadm
+	sudo /tmp/cephadm add-repo --release pacific
+
 	curl -fsSL https://download.ceph.com/keys/release.asc | gpg --no-default-keyring --keyring /tmp/fix.gpg --import -
 	gpg --no-default-keyring --keyring /tmp/fix.gpg --export | sudo tee  /etc/apt/trusted.gpg.d/ceph.release.gpg >/dev/null
-	rm /tmp/fix.gpg
+	rm /tmp/fix.gpg && rm /tmp/cephadm
 	
 	sudo apt update -y
 	sudo apt install ceph-common -y
-	sudo cephadm install
 
         read -r -p "Is this first node of cluster? [Y/n]" response
         response="${response,,}"
 
         if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
             echo "Yes - bootstrap in progress"
-            sudo cephadm bootstrap --mon-ip $IP
+            FSID = "$(uuidgen)"
 	else
             echo "No"
 	fi
