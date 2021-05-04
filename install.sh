@@ -245,7 +245,7 @@ elif [ $input == "ceph" ]; then
         if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
             echo "Yes - bootstrap in progress"
             FSID="$(uuidgen)"
-            echo "[global]" | sudo tee -a /etc/ceph/ceph.conf
+            echo "[global]" | sudo tee /etc/ceph/ceph.conf
             echo "fsid = $FSID" | sudo tee -a /etc/ceph/ceph.conf
             echo "mon initial members = $IP" | sudo tee -a /etc/ceph/ceph.conf
             echo "mon host = $IP" | sudo tee -a /etc/ceph/ceph.conf
@@ -258,6 +258,7 @@ elif [ $input == "ceph" ]; then
             sudo chown ceph:ceph /tmp/ceph.mon.keyring
             monmaptool --create --add $HOSTNAME $IP --fsid $FSID /tmp/monmap
             sudo mkdir -p /var/lib/ceph/mon/ceph-$HOSTNAME
+            sudo chown -R ceph:ceph /var/lib/ceph
             sudo -u ceph ceph-mon --cluster ceph --mkfs -i $HOSTNAME --monmap /tmp/monmap --keyring /tmp/ceph.mon.keyring
 	else
             echo "No"
