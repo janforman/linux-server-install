@@ -232,6 +232,14 @@ elif [ $input == "ceph" ]; then
 	echo deb https://download.ceph.com/debian-pacific/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
 	sudo apt update -y
 	sudo apt install ceph-deploy ceph-common ntp -y
+	
+	export USER_NAME="ceph-admin"
+	export USER_PASS="ChangeMe"
+	sudo useradd --create-home -s /bin/bash ${USER_NAME}
+	echo "${USER_NAME}:${USER_PASS}"|sudo chpasswd
+	echo "${USER_NAME} ALL = (root) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/${USER_NAME}
+	sudo chmod 0440 /etc/sudoers.d/${USER_NAME}
+
 	echo "CEPH Server installed"
 
 
