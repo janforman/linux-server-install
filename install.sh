@@ -237,14 +237,27 @@ elif [ $input == "ceph" ]; then
 	rm /tmp/fix.gpg && rm /tmp/cephadm
 	
 	sudo apt update -y
-	sudo apt install ceph-common -y
+	sudo apt install ceph-common ceph-base ceph-mon -y
 
         read -r -p "Is this first node of cluster? [Y/n]" response
         response="${response,,}"
 
         if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
             echo "Yes - bootstrap in progress"
-            FSID = "$(uuidgen)"
+            FSID="$(uuidgen)"
+            echo "fsid = $FSID" | sudo tee -a /etc/ceph/ceph.conf
+            echo "mon initial members = $IP" | sudo tee -a /etc/ceph/ceph.conf
+            echo "mon host = $IP" | sudo tee -a /etc/ceph/ceph.conf
+	    sudo mkdir /var/lib/ceph/bootstrap-osd/
+            sudo ceph-authtool --create-keyring /tmp/ceph.mon.keyring --gen-key -n mon. --cap mon 'allow *'
+            sudo ceph-authtool --create-keyring /etc/ceph/ceph.client.admin.keyring --gen-key -n client.admin --cap mon 'allow *' --cap osd 'allow *' --cap mds 'allow *' --cap mgr 'allow *'
+            sudo ceph-authtool --create-keyring /var/lib/ceph/bootstrap-osd/ceph.keyring --gen-key -n client.bootstrap-osd --cap mon 'profile bootstrap-osd' --cap mgr 'allow r'
+            sudo ceph-authtool /tmp/ceph.mon.keyring --import-keyring /etc/ceph/ceph.client.admin.keyring
+            sudo ceph-authtool /tmp/ceph.mon.keyring --import-keyring /var/lib/ceph/bootstrap-osd/ceph.keyring
+            sudo chown ceph:ceph /tmp/ceph.mon.keyring
+            monmaptool --create --add $HOSTNAME $IP --fsid $FSID /tmp/monmap
+            sudo mkdir -p /var/lib/ceph/mon/ceph-$HOSTNAME
+            sudo -u ceph ceph-mon --cluster ceph --mkfs -i $HOSTNAME --monmap /tmp/monmap --keyring /tmp/ceph.mon.keyring
 	else
             echo "No"
 	fi
