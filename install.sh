@@ -13,6 +13,7 @@ read input
 IP="$(hostname -I|xargs)"
 HOSTNAME="$(hostname -s)"
 NIC=$(ip link | awk -F: '$0 !~ "lo|vir|wl|docker|^[^0-9]"{sub(/@.*/,"");print $2;getline}')
+VIRT="$(systemd-detect-virt)"
 
 if [ $input == "nginx" ]; then
 	echo "Installing nginx + PHP.."
@@ -224,6 +225,14 @@ elif [ $input == "coturn" ]; then
 	sudo systemctl daemon-reload
 	sudo systemctl restart coturn
 	echo "Successfully installed coturn server!"
+
+elif [ $input == "ceph" ]; then
+	echo "Installing CEPH.."
+        curl -fsSL https://download.ceph.com/keys/release.asc | sudo apt-key add -
+	echo deb https://download.ceph.com/debian-pacific/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
+	sudo apt update -y
+	echo "CEPH Server installed"
+
 
 elif [ $input == "nextcloud" ]; then
 	echo "Installing nextcloud..."
