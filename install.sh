@@ -260,6 +260,8 @@ elif [ $input == "ceph" ]; then
             sudo mkdir -p /var/lib/ceph/mon/ceph-$HOSTNAME
             sudo chown -R ceph:ceph /var/lib/ceph
             sudo -u ceph ceph-mon --cluster ceph --mkfs -i $HOSTNAME --monmap /tmp/monmap --keyring /tmp/ceph.mon.keyring
+	    sudo systemctl enable ceph-mon@$HOSTNAME
+	    sudo systemctl start ceph-mon@$HOSTNAME
 	else
             echo "No"
 	fi
