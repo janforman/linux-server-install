@@ -231,7 +231,7 @@ elif [ $input == "ceph" ]; then
         curl -fsSL https://download.ceph.com/keys/release.asc | sudo apt-key add -
 	echo deb https://download.ceph.com/debian-pacific/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
 	sudo apt update -y
-	sudo apt install ceph-deploy ceph-common ntp -y
+	sudo apt install cephadm -y
 	
 	export USER_NAME="ceph-admin"
 	export USER_PASS="$(openssl rand -base64 32)"
@@ -241,7 +241,8 @@ elif [ $input == "ceph" ]; then
 	sudo chmod 0440 /etc/sudoers.d/${USER_NAME}
 	sudo -u ceph-admin mkdir /home/ceph-admin/.ssh
 	sudo -u ceph-admin ssh-keygen -t ecdsa -b 384 -N "" -f /home/ceph-admin/.ssh/id_rsa
-
+	sudo cephadm install
+	
 	echo "CEPH Server installed"
 
 
