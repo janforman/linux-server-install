@@ -245,6 +245,7 @@ elif [ $input == "ceph" ]; then
         if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
             echo "Yes - bootstrap in progress"
             FSID="$(uuidgen)"
+            echo "[global]" | sudo tee -a /etc/ceph/ceph.conf
             echo "fsid = $FSID" | sudo tee -a /etc/ceph/ceph.conf
             echo "mon initial members = $IP" | sudo tee -a /etc/ceph/ceph.conf
             echo "mon host = $IP" | sudo tee -a /etc/ceph/ceph.conf
