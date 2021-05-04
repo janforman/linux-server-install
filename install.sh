@@ -228,8 +228,15 @@ elif [ $input == "coturn" ]; then
 
 elif [ $input == "ceph" ]; then
 	echo "Installing CEPH.."
-	sudo apt install cephadm ceph-common -y
+	sudo apt install cephadm -y
 	
+	sudo cephadm add-repo --release pacific
+	curl -fsSL https://download.ceph.com/keys/release.asc | gpg --no-default-keyring --keyring /tmp/fix.gpg --import -
+	gpg --no-default-keyring --keyring /tmp/fix.gpg --export | sudo tee  /etc/apt/trusted.gpg.d/ceph.release.gpg >/dev/null
+	rm /tmp/fix.gpg
+	
+	sudo apt update -y
+	sudo apt install ceph-common -y
 	sudo cephadm install
 
         read -r -p "Is this first node of cluster? [Y/n]" response
