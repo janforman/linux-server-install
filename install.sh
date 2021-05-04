@@ -249,6 +249,7 @@ elif [ $input == "ceph" ]; then
             echo "fsid = $FSID" | sudo tee -a /etc/ceph/ceph.conf
             echo "mon initial members = $IP" | sudo tee -a /etc/ceph/ceph.conf
             echo "mon host = $IP" | sudo tee -a /etc/ceph/ceph.conf
+            printf "auth cluster required = cephx\nauth service required = cephx\nauth client required = cephx\nosd journal size = 1024\nosd pool default size = 3\nosd pool default min size = 2\nosd pool default pg num = 333\nosd pool default pgp num = 333\nosd crush chooseleaf type = 1\n" | sudo tee -a /etc/ceph/ceph.conf
 	    sudo mkdir /var/lib/ceph/bootstrap-osd/
             sudo ceph-authtool --create-keyring /tmp/ceph.mon.keyring --gen-key -n mon. --cap mon 'allow *'
             sudo ceph-authtool --create-keyring /etc/ceph/ceph.client.admin.keyring --gen-key -n client.admin --cap mon 'allow *' --cap osd 'allow *' --cap mds 'allow *' --cap mgr 'allow *'
