@@ -13,7 +13,7 @@ read input
 IP="$(hostname -I|xargs)"
 HOSTNAME="$(hostname -s)"
 NIC=$(ip link | awk -F: '$0 !~ "lo|vir|wl|docker|^[^0-9]"{sub(/@.*/,"");print $2;getline}')
-VIRT="$(systemd-detect-virt)"
+VIRT="$(systemd-detect-virt -c)"
 
 if [ $input == "nginx" ]; then
 	echo "Installing nginx + PHP.."
@@ -233,14 +233,6 @@ elif [ $input == "ceph" ]; then
 	sudo apt update -y
 	sudo apt install cephadm -y
 	
-	export USER_NAME="ceph-admin"
-	export USER_PASS="$(openssl rand -base64 32)"
-	sudo useradd --create-home -s /bin/bash ${USER_NAME}
-	echo "${USER_NAME}:${USER_PASS}"|sudo chpasswd
-	echo "${USER_NAME} ALL = (root) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/${USER_NAME}
-	sudo chmod 0440 /etc/sudoers.d/${USER_NAME}
-	sudo -u ceph-admin mkdir /home/ceph-admin/.ssh
-	sudo -u ceph-admin ssh-keygen -t ecdsa -b 384 -N "" -f /home/ceph-admin/.ssh/id_rsa
 	sudo cephadm install
 
         read -r -p "Is this first node of cluster? [Y/n]" response
@@ -254,7 +246,6 @@ elif [ $input == "ceph" ]; then
 	fi
 	
 	echo "CEPH Server installed"
-
 
 elif [ $input == "nextcloud" ]; then
 	echo "Installing nextcloud..."
