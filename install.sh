@@ -237,7 +237,7 @@ elif [ $input == "ceph" ]; then
 	rm /tmp/fix.gpg && rm /tmp/cephadm
 	
 	sudo apt update -y
-	sudo apt install ceph-common ceph-base ceph-mon -y
+	sudo apt install ceph-common ceph-base ceph-mon ceph-osd -y
 
         read -r -p "Is this first node of cluster? [Y/n]" response
         response="${response,,}"
