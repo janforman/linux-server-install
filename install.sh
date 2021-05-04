@@ -231,6 +231,7 @@ elif [ $input == "ceph" ]; then
         curl -fsSL https://download.ceph.com/keys/release.asc | sudo apt-key add -
 	echo deb https://download.ceph.com/debian-pacific/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
 	sudo apt update -y
+	sudo apt install ceph-deploy ceph-common ntp -y
 	echo "CEPH Server installed"
 
 
