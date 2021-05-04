@@ -242,6 +242,16 @@ elif [ $input == "ceph" ]; then
 	sudo -u ceph-admin mkdir /home/ceph-admin/.ssh
 	sudo -u ceph-admin ssh-keygen -t ecdsa -b 384 -N "" -f /home/ceph-admin/.ssh/id_rsa
 	sudo cephadm install
+
+        read -r -p "Is this first node of cluster? [Y/n]" response
+        response="${response,,}"
+
+        if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
+            echo "Yes - bootstrap in progress"
+            sudo cephadm bootstrap --mon-ip $IP
+	else
+            echo "No"
+	fi
 	
 	echo "CEPH Server installed"
 
