@@ -264,6 +264,7 @@ elif [ $input == "ceph" ]; then
 	    sudo systemctl enable ceph-mon@$HOSTNAME
 	    sudo systemctl start ceph-mon@$HOSTNAME
 	    sudo ceph config set mon auth_allow_insecure_global_id_reclaim false
+	    sudo ceph config set mon mon_warn_on_msgr2_not_enabled true
 	else
             echo "No"
 	fi
