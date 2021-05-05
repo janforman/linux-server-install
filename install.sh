@@ -237,7 +237,7 @@ elif [ $input == "ceph" ]; then
 	rm /tmp/fix.gpg && rm /tmp/cephadm
 	
 	sudo apt update -y
-	sudo apt install ceph-common ceph-base ceph-mon ceph-osd -y
+	sudo apt install ceph -y
 
         read -r -p "Is this first node of cluster? [Y/n]" response
         response="${response,,}"
@@ -248,7 +248,7 @@ elif [ $input == "ceph" ]; then
             echo "[global]" | sudo tee /etc/ceph/ceph.conf
             echo "fsid = $FSID" | sudo tee -a /etc/ceph/ceph.conf
             echo "mon initial members = $HOSTNAME" | sudo tee -a /etc/ceph/ceph.conf
-            echo "mon host = v2:$IP:3300" | sudo tee -a /etc/ceph/ceph.conf
+            echo "mon host = $IP" | sudo tee -a /etc/ceph/ceph.conf
             printf "auth cluster required = cephx\nauth service required = cephx\nauth client required = cephx\nosd journal size = 1024\nosd pool default size = 3\nosd pool default min size = 2\nosd pool default pg num = 333\nosd pool default pgp num = 333\nosd crush chooseleaf type = 1\n" | sudo tee -a /etc/ceph/ceph.conf
 	    sudo mkdir /var/lib/ceph/bootstrap-osd/
             sudo ceph-authtool --create-keyring /tmp/ceph.mon.keyring --gen-key -n mon. --cap mon 'allow *'
@@ -264,7 +264,10 @@ elif [ $input == "ceph" ]; then
 	    sudo systemctl enable ceph-mon@$HOSTNAME
 	    sudo systemctl start ceph-mon@$HOSTNAME
 	    sudo ceph config set mon auth_allow_insecure_global_id_reclaim false
-	    sudo ceph config set mon mon_warn_on_msgr2_not_enabled true
+	    sudo ceph config set mon mon_warn_on_msgr2_not_enabled false
+	    
+	    sudo ceph auth get-or-create mgr.$HOSTNAME mon 'allow profile mgr' osd 'allow *' mds 'allow *' >/tmp/ceph.mgr.keyring
+	    sudo cp /tmp/ceph.mgr.keyring /var/lib/ceph/mgr/ceph-$HOSTNAME
 	else
             echo "No"
 	fi
