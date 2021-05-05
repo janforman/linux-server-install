@@ -267,6 +267,8 @@ elif [ $input == "ceph" ]; then
 	    
 	    sudo ceph auth get-or-create mgr.$HOSTNAME mon 'allow profile mgr' osd 'allow *' mds 'allow *' >/tmp/ceph.mgr.keyring
 	    sudo cp /tmp/ceph.mgr.keyring /var/lib/ceph/mgr/ceph-$HOSTNAME/keyring
+	    sudo systemctl enable ceph-mgr.target
+	    sudo systemctl start ceph-mgr.target
 	else
             echo "No"
 	fi
