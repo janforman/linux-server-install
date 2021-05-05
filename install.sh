@@ -269,7 +269,8 @@ elif [ $input == "ceph" ]; then
             echo "No"
 	fi
 	sudo ceph -s
-	echo "Create OSD by running -> sudo ceph-volume lvm create --data /dev/sdX"
+	echo "Create OSD by running -> sudo ceph-volume lvm create --data /dev/sd{X}"
+	echo "Create POOL by running -> sudo ceph osd pool create {pool} 128"
 	echo "CEPH Server installed"
 
 elif [ $input == "nextcloud" ]; then
