@@ -267,7 +267,7 @@ elif [ $input == "ceph" ]; then
 	    sudo ceph config set mon mon_warn_on_msgr2_not_enabled false
 	    
 	    sudo ceph auth get-or-create mgr.$HOSTNAME mon 'allow profile mgr' osd 'allow *' mds 'allow *' >/tmp/ceph.mgr.keyring
-	    sudo cp /tmp/ceph.mgr.keyring /var/lib/ceph/mgr/ceph-$HOSTNAME
+	    sudo cp /tmp/ceph.mgr.keyring /var/lib/ceph/mgr/ceph-$HOSTNAME/keyring
 	else
             echo "No"
 	fi
