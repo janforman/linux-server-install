@@ -271,6 +271,7 @@ elif [ $input == "ceph" ]; then
 	    sudo chown -R ceph:ceph /var/lib/ceph/mgr
 	    sudo systemctl enable ceph-mgr@$HOSTNAME
 	    sudo systemctl start ceph-mgr@$HOSTNAME
+	    sudo sed '/ProtectClock=true/d' -i /lib/systemd/system/ceph-osd@.service
 	else
             echo "No"
 	fi
