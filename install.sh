@@ -278,6 +278,8 @@ elif [ $input == "ceph" ]; then
 	sudo ceph -s
 	echo "Create OSD by running -> sudo ceph-volume lvm create --data /dev/sd{X}"
 	echo "Create POOL by running -> sudo ceph osd pool create {pool} 128"
+	sudo ufw allow 3300,6789/tcp
+	sudo ufw allow 6800:7300/tcp
 	echo "CEPH Server installed"
 
 elif [ $input == "nextcloud" ]; then
