@@ -257,7 +257,7 @@ elif [ $input == "ceph" ]; then
             sudo ceph-authtool /tmp/ceph.mon.keyring --import-keyring /etc/ceph/ceph.client.admin.keyring
             sudo ceph-authtool /tmp/ceph.mon.keyring --import-keyring /var/lib/ceph/bootstrap-osd/ceph.keyring
             sudo chown ceph:ceph /tmp/ceph.mon.keyring
-            monmaptool --create --add $HOSTNAME $IP --fsid $FSID /tmp/monmap
+            monmaptool --create --add $HOSTNAME $IP /tmp/monmap
             sudo mkdir -p /var/lib/ceph/mon/ceph-$HOSTNAME
             sudo chown -R ceph:ceph /var/lib/ceph
             sudo -u ceph ceph-mon --cluster ceph --mkfs -i $HOSTNAME --monmap /tmp/monmap --keyring /tmp/ceph.mon.keyring
