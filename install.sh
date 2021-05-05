@@ -263,10 +263,11 @@ elif [ $input == "ceph" ]; then
             sudo -u ceph ceph-mon --cluster ceph --mkfs -i $HOSTNAME --monmap /tmp/monmap --keyring /tmp/ceph.mon.keyring
 	    sudo systemctl enable ceph-mon@$HOSTNAME
 	    sudo systemctl start ceph-mon@$HOSTNAME
+	    sudo ceph config set mon auth_allow_insecure_global_id_reclaim false
 	else
             echo "No"
 	fi
-	
+	sudo ceph -s
 	echo "CEPH Server installed"
 
 elif [ $input == "nextcloud" ]; then
