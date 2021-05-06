@@ -271,11 +271,11 @@ elif [ $input == "ceph" ]; then
 	    sudo chown -R ceph:ceph /var/lib/ceph/mgr
 	    sudo systemctl enable ceph-mgr@$HOSTNAME
 	    sudo systemctl start ceph-mgr@$HOSTNAME
-	    sudo sed '/ProtectClock=true/d' -i /lib/systemd/system/ceph-osd@.service
 	    sudo ssh-keygen -t ecdsa -b 384 -f /root/.ssh/id_ecdsa
 	else
             echo "No"
 	fi
+	sudo sed '/ProtectClock=true/d' -i /lib/systemd/system/ceph-osd@.service
 	sudo ceph -s
 	sudo ufw allow 3300,6789/tcp
 	sudo ufw allow 6800:7300/tcp
@@ -287,6 +287,7 @@ elif [ $input == "ceph" ]; then
 	echo "Create POOL by running -> sudo ceph osd pool create {pool} 128"
 	echo "Copy SSH key -> sudo ssh-copy-id root@destination"
 	echo "Copy SSH key -> sudo sudo scp /root/.ssh/id_ecdsa root@destination:/root/.ssh"
+	echo "Copy CEPH etc -> sudo sudo scp /etc/ceph/* root@destination:/etc/ceph"
 	echo "CEPH Server installed"
 
 elif [ $input == "nextcloud" ]; then
