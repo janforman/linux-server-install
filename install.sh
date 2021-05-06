@@ -278,7 +278,7 @@ elif [ $input == "ceph" ]; then
 	fi
 	sudo sed '/ProtectClock=true/d' -i /lib/systemd/system/ceph-osd@.service
 	sudo ceph -s
-	sudo ufw allow 3300,6789/tcp
+	sudo ufw allow 3260,5000,3300,6789/tcp
 	sudo ufw allow 6800:7300/tcp
 	sudo sed -i '/PermitRootLogin prohibit-password/s/^#//g' /etc/ssh/sshd_config
 	sudo sed -i 's/^\(PermitRootLogin\s* \s*\).*$/\1yes/' /etc/ssh/sshd_config
