@@ -264,6 +264,7 @@ elif [ $input == "ceph" ]; then
 	    sudo systemctl start ceph-mon@$HOSTNAME
 	    sudo ceph config set mon auth_allow_insecure_global_id_reclaim false
 	    sudo ceph config set mon mon_warn_on_msgr2_not_enabled false
+	    sudo ceph config set mon mon_allow_pool_delete true
 	    
 	    sudo ceph auth get-or-create mgr.$HOSTNAME mon 'allow profile mgr' osd 'allow *' mds 'allow *' >/tmp/ceph.mgr.keyring
 	    sudo mkdir /var/lib/ceph/mgr/ceph-$HOSTNAME
