@@ -286,6 +286,7 @@ elif [ $input == "ceph" ]; then
 	echo "Create OSD by running -> sudo ceph-volume lvm create --data /dev/sd{X}"
 	echo "Create POOL by running -> sudo ceph osd pool create {pool} 128"
 	echo "Copy SSH key -> sudo ssh-copy-id root@destination"
+	echo "Copy SSH key -> sudo sudo scp /root/.ssh/id_ecdsa root@destination:/root/.ssh"
 	echo "CEPH Server installed"
 
 elif [ $input == "nextcloud" ]; then
