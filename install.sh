@@ -274,8 +274,8 @@ elif [ $input == "ceph" ]; then
 	    sudo systemctl enable ceph-mgr@$HOSTNAME
 	    sudo systemctl start ceph-mgr@$HOSTNAME
 	    
-	    sudo ceph auth get-or-create mds.$HOSTNAME mon 'profile mds' mgr 'profile mds' mds 'allow *' osd 'allow *' > /var/lib/ceph/mds/ceph-$HOSTNAME/keyring
 	    sudo mkdir /var/lib/ceph/mds/ceph-$HOSTNAME
+	    sudo ceph auth get-or-create mds.$HOSTNAME mon 'profile mds' mgr 'profile mds' mds 'allow *' osd 'allow *' > /var/lib/ceph/mds/ceph-$HOSTNAME/keyring
 	    sudo chown -R ceph:ceph /var/lib/ceph/mds
 	    sudo systemctl enable ceph-mds@$HOSTNAME
 	    sudo systemctl start ceph-mds@$HOSTNAME
