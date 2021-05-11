@@ -285,6 +285,7 @@ elif [ $input == "ceph" ]; then
             echo "No"
 	fi
 	sudo sed '/ProtectClock=true/d' -i /lib/systemd/system/ceph-osd@.service
+	sudo sed '/ProtectClock=true/d' -i /lib/systemd/system/ceph-mon@.service
 	sudo ceph -s
 	sudo ufw allow 3260,5000,3300,6789/tcp
 	sudo ufw allow 6800:7300/tcp
