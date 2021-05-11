@@ -273,6 +273,13 @@ elif [ $input == "ceph" ]; then
 	    sudo chown -R ceph:ceph /var/lib/ceph/mgr
 	    sudo systemctl enable ceph-mgr@$HOSTNAME
 	    sudo systemctl start ceph-mgr@$HOSTNAME
+	    
+	    sudo ceph auth get-or-create mds.$HOSTNAME mon 'profile mds' mgr 'profile mds' mds 'allow *' osd 'allow *' > /var/lib/ceph/mds/ceph-$HOSTNAME/keyring
+	    sudo mkdir /var/lib/ceph/mds/ceph-$HOSTNAME
+	    sudo chown -R ceph:ceph /var/lib/ceph/mds
+	    sudo systemctl enable ceph-mds@$HOSTNAME
+	    sudo systemctl start ceph-mds@$HOSTNAME
+	    
 	    sudo ssh-keygen -t ecdsa -b 384 -f /root/.ssh/id_ecdsa
 	else
             echo "No"
