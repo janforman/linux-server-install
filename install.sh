@@ -90,7 +90,7 @@ elif [ $input == "scylladb" ]; then
 
 elif [ $input == "citus" ]; then
 	curl https://install.citusdata.com/community/deb.sh | sudo bash
-	sudo apt-get -y install postgresql-13-citus-10.0
+	sudo apt-get -y install postgresql-13-citus-10.0 postgresql-13-postgis-3
 	sudo pg_conftool 13 main set shared_preload_libraries citus
 	sudo pg_conftool 13 main set listen_addresses '*'
 	echo "host    all             all             10.0.0.0/8              trust" | sudo tee -a /etc/postgresql/13/main/pg_hba.conf
