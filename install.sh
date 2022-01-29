@@ -58,8 +58,8 @@ elif [ $input == "mariadb" ]; then
 	echo "MariaDB installed"
 
 elif [ $input == "wso2mi" ]; then
- 	echo "Installing WSO2 Micro Integrator 1.2.0"
-        sudo wget -O /tmp/ei.zip https://github.com/wso2/micro-integrator/releases/download/v1.2.0/wso2mi-1.2.0.zip
+ 	echo "Installing WSO2 Micro Integrator 4.0.0"
+        sudo wget -O /tmp/ei.zip https://github.com/wso2/micro-integrator/releases/download/v4.0.0/wso2mi-4.0.0.zip
         sudo unzip /tmp/ei.zip -d /opt
         sudo rm /tmp/ei.zip
 	sudo apt install -y openjdk-8-jdk
@@ -67,9 +67,9 @@ elif [ $input == "wso2mi" ]; then
 	sudo cp ./init.d-wso2mi.sh /etc/init.d/wso2mi
 	sudo chmod +x /etc/init.d/wso2mi
 	sudo update-rc.d wso2mi defaults
-	sudo useradd  --home /opt/wso2mi-1.2.0 -M wso2
-	sudo cp ./jdbc/* /opt/wso2mi-1.2.0/dropins/
-	sudo chown -R wso2:nogroup /opt/wso2mi-1.2.0
+	sudo useradd  --home /opt/wso2mi-4.0.0 -M wso2
+	sudo cp ./jdbc/* /opt/wso2mi-4.0.0/dropins/
+	sudo chown -R wso2:nogroup /opt/wso2mi-4.0.0
 	echo "WSO2 Micro Integrator installed"
 
 elif [ $input == "scylladb" ]; then
