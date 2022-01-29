@@ -3,7 +3,7 @@
 ### BEGIN INIT INFO
 # Provides:          wso2
 # Product:           wso2mi
-# Product Version:   1.2.0
+# Product Version:   4.0.0
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Start and stop the wso2 product server daemon
